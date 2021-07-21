@@ -28,7 +28,7 @@ jobs:
         source venv/bin/activate
 
     - name: Create requirements.txt
-      run: python -m pipenv lock -r > requirements.txt
+      run: pipenv lock -r > requirements.txt
 
     - name: Install dependencies
       run: pip install -r requirements.txt
