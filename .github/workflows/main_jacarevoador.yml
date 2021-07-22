@@ -33,6 +33,7 @@ jobs:
     - name: Migrate database
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DEBUG: ${{ secrets.DEBUG }}
       run: python manage.py migrate
 
     # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
