@@ -9,7 +9,7 @@ env:
   WEBAPP_NAME: 'jacarevoador'  # Replace with the name of your Azure web app
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,9 +39,9 @@ jobs:
           .
           !venv/
 
-  deploy-to-webapp:
+  deploy:
     runs-on: ubuntu-latest
-    needs: build-and-test
+    needs: build
     environment:
       name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
