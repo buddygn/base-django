@@ -10,9 +10,7 @@ class UserManager(BaseUserManager):
     use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
-        """
-        Creates and saves a User with the given email and password.
-        """
+        """Creates and saves a User with the given email and password."""
         if not email:
             raise ValueError('The give email must be set')
         email = self.normalize_email(email)
@@ -22,10 +20,12 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email, password=None, **extra_fields):
+        """Create user."""
         extra_fields.setdefault('is_superuser', False)
         return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
+        """Create superuser."""
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_staff', True)
 
@@ -38,18 +38,16 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    """
-    An abstract base class implementing a fully featured User model with
-    admin-compliant permissions.
+    """Abstract class that implements the user."""
 
-    Email and password are required. Other fields are optional.
-    """
     first_name = models.CharField(_('first name'), max_length=150, blank=True)
     email = models.EmailField(_('email address'), blank=True, unique=True)
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
-        help_text=_('Designates whether the user can log into this admin site.'),
+        help_text=_(
+            'Designates whether the user can log into this admin site.'
+        ),
     )
     is_active = models.BooleanField(
         _('active'),
@@ -76,10 +74,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.email = self.__class__.objects.normalize_email(self.email)
 
     def get_full_name(self):
-        """
-        Return the first_name plus the last_name, with a space in between.
-        """
-        full_name = '%s' % self.first_name
+        """Return the first_name plus the last_name, with a space in between."""
+        full_name = f'{self.first_name}'
         return full_name.strip()
 
     def get_short_name(self):
