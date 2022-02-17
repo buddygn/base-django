@@ -6,7 +6,7 @@ format:
 lint:
 	@blue . --check
 	@isort . --check
-	@prospector --no-autodetect --uses django -i base/asgi.py -i base/wsgi.py
+	@prospector --no-autodetect --uses django -i base/asgi.py -i base/wsgi.py -i .venv
 	@flake8
 test:
 	@pytest -v
