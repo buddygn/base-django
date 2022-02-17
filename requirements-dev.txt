@@ -1,4 +1,4 @@
-pytest >= "^7.0.1"
+pytest-django
 blue >= "0.7.0"
 isort >= ^5.10.1"
 mkdocs >= "1.2.3"
