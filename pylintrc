@@ -1,9 +1,11 @@
 [MASTER]
+ignore= base/asgi.py base/wsgi.py .venv
+
+[MESSAGES CONTROL]
 disable=
     C0114, # missing-module-docstring
     C0115, # missing-class-docstring
-    C0116,
-    C0115,
-    C0415,
-    R0903,
-    C0103,
+    C0116, # missing-function-docstring
+    C0415, # import-outside-toplevel
+    R0903, # too-few-public-methods
+    C0103, # name constant
