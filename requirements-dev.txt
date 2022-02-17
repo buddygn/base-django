@@ -4,6 +4,6 @@ isort >= ^5.10.1"
 mkdocs >= "1.2.3"
 prospector >= "1.6.0"
 pip-audit >= "1.1.2"
-flake8 = "3.9.0"
+flake8 == "3.9.0"
 
 -r requirements.txt
