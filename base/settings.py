@@ -1,6 +1,8 @@
 import os
+from functools import partial
 from pathlib import Path
 
+import dj_database_url
 from decouple import Csv, config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY', default='tangamandapio', cast=str)
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=Csv())
 
@@ -26,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base.accounts',
+    'base.core'
 ]
 
 MIDDLEWARE = [
@@ -62,23 +65,12 @@ WSGI_APPLICATION = 'base.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# default_db_url = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-#
-# parse_database = partial(dj_database_url.parse, conn_max_age=600)
-#
-# DATABASES = {
-#     'default': config('DATABASE_URL', default_db_url, cast=parse_database)
-# }
+default_db_url = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+
+parse_database = partial(dj_database_url.parse, conn_max_age=600)
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': '5432',
-    }
+    'default': config('DATABASE_URL', default_db_url, cast=parse_database)
 }
 
 
